@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Job {
+  id              String    @id @default(uuid())
+  caseName        String
+  durationMinutes Int
+  locationType    String    // "Physical" or "Remote"
+  city            String?   // E.g. "Jakarta", if physical
+  status          String    @default("NEW") // NEW, ASSIGNED, TRANSCRIBED, REVIEWED, COMPLETED
+  
+  reporterId      String?
+  reporter        Reporter? @relation(fields: [reporterId], references: [id])
+  
+  editorId        String?
+  editor          Editor?   @relation(fields: [editorId], references: [id])
+  
+  reporterPayment Float?
+  editorPayment   Float?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Reporter {
+  id           String  @id @default(uuid())
+  name         String
+  location     String
+  availability Boolean @default(true)
+  jobs         Job[]
+}
+
+model Editor {
+  id    String @id @default(uuid())
+  name  String
+  jobs  Job[]
+}
