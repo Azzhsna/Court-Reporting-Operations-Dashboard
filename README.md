@@ -25,6 +25,18 @@ REVIEWED
 COMPLETED
 ```
 
+### Dashboard
+![Dashboard](./dashboard.png)
+
+### Pop Up Add
+![Popup add](./popup-add.png)
+
+### Assign Editor
+![Assign Editor](./assigneditor.png)
+
+### Assign Reporter
+![Assign Reporter](./assignreporter.png)
+
 ## Tech Stack
 
 ### Frontend
